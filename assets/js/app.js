@@ -62,6 +62,7 @@ function newNote(e) {
             myNoteDiv.style.order = -count;
             myNote.appendChild(myNoteDiv);
 
+            // /// © 2019 dev-aly3n ///
             //remove-btn: create the <a> of the remove-btn  and add its class and apeend it to his parrent
             const removeBtn = document.createElement("span");
             removeBtn.classList.add("remove-btn");
@@ -252,5 +253,5 @@ function removeExample() {
 }
 
 //*****************************************************************\\
-// contact aly3n via this mail: aly3n.dev [AAATTT] gmail {dot} com ||
+// contact aly3n via this mail: dev.aly3n [AAATTT] gmail {dot} com ||
 //*****************************************************************//
