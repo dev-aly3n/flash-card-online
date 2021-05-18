@@ -4,7 +4,7 @@ my first project. a very simple flash card for learning a new language.
 
 
         
-///          © 2019 dev-aly3n         ///      
+///          © 2020 dev-aly3n         ///      
 
 
 
