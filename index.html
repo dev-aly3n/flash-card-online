@@ -29,14 +29,13 @@
                     </br>
                     <label for="add-new-note" class="lable"> Note (or description): </label>
                     </br>
-                    <textarea type="text" maxlength="220" name="text-note" id="add-new-note" class="form-text-area"
+                    <textarea type="text"  name="text-note" id="add-new-note" class="form-text-area"
                         placeholder="type your Note here..."></textarea>
                     </br>
                     <label for="color-selection" class="lable">select color for card:</label>
                     <select id="color-selection" name="color-selection">
-                        <option value="" selected disabled hidden>Color</option>
                         <option value="pink">pink</option>
-                        <option value="#00ffff">blue</option>
+                        <option value="#00ffff" selected>blue</option>
                         <option value="#80ff00">green </option>
                         <option value="#ffbf00">yellow </option>
                     </select>
@@ -52,14 +51,14 @@
                         autocomplete="off">
                 </form>
             </div>
-            <!-- /// © 2019 dev-aly3n /// -->
+            <!-- /// © 2020 dev-aly3n /// -->
             <div class="column" id="my-note">
                 <h2 style="text-align: center; 
                 font-size: 30px; font-weight: bolder; margin-bottom: 0; text-decoration: underline; ">
                     my notes
                 </h2>
                 <div id="flexbox-container">
-                    <div class="card-container">
+                    <div class="card-container" style="display: none; order: 999;">
                         <span class="remove-btn" id="example">
                             ✕
                         </span>
