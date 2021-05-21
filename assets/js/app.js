@@ -22,9 +22,14 @@ function eventlisteners() {
 
   //load saved note from LS
   document.addEventListener("DOMContentLoaded", localStorageOnLoad);
+  document.querySelector('.new-note-btn').addEventListener('click', addNewNoteOnMobile);
 }
 
 //functions
+function addNewNoteOnMobile(){
+  document.querySelector('.new-note').style.display = 'block';
+}
+
 function newNote(e) {
   e.preventDefault();
 

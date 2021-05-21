@@ -1,0 +1,22 @@
+{
+  "name": "flashcard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "build": "postcss assets/css/custom.css -o assets/css/custom.output.css",
+    "watch": "postcss assets/css/custom.css -o assets/css/custom.output.css --watch",
+    "prod": "cross-env NODE_ENV=production postcss assets/css/custom.css -o assets/css/custom.output.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.2.5",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "^2.1.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}
