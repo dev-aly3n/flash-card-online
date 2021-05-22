@@ -1,4 +1,3 @@
-
 // modal start here
 
 const modal = document.querySelector(".main-modal");
@@ -30,13 +29,13 @@ window.addEventListener("click", function (e) {
 
 // modal finish here
 
-
-
 // When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
+window.onscroll = function () {
+  myFunction();
+};
 
 // Get the header
-var header = document.querySelector('.new-note-btn')
+var header = document.querySelector(".new-note-btn");
 
 // Get the offset position of the navbar
 var sticky = header.offsetTop;
@@ -49,15 +48,6 @@ function myFunction() {
     header.classList.remove("sticky");
   }
 }
-
-
-
-
-
-
-
-
-
 
 //variables
 const myNote = document.querySelector("#flexbox-container");
@@ -74,7 +64,9 @@ eventlisteners();
 function eventlisteners() {
   // submit the form
   document.querySelector("#form").addEventListener("submit", newNote);
-  document.querySelector("#form-input-modal").addEventListener("click", newNoteModal);
+  document
+    .querySelector("#form-input-modal")
+    .addEventListener("click", newNoteModal);
 
   // remove notes by click
   myNote.addEventListener("click", removeNote);
@@ -88,13 +80,12 @@ function eventlisteners() {
 
 //functions
 
-
 function newNote(e) {
   e.preventDefault();
 
   //ho ny p ot value access
   const email = document.querySelector("#email").value;
-  const name = document.querySelector("#email").value;
+  const name = document.querySelector("#name").value;
 
   // allert if filled via a b/o-/t
   if (name !== "" || email !== "") {
@@ -109,14 +100,17 @@ function newNote(e) {
 
     // form validation
     if (subject === "" || note === "" || colorSelected === "") {
-      alert("Please fill all fields and select color of card!");
+      document.querySelector(".error-message").style.display = "block";
+      setTimeout(() => {
+        document.querySelector(".error-message").style.display = "none";
+      }, 3000);
     } else {
       //counting the number of clicking on button to use it for order of flexbox
       // using (-count) to reverse the order
       document.querySelector("#form-input").onclick = function () {
         count = count + 1;
       };
-      
+
       //card-container: create the <div> of the card-container and add its class and append it to his parrent
       const myNoteDiv = document.createElement("div");
       myNoteDiv.classList.add("card-container");
@@ -172,8 +166,8 @@ function newNoteModal(e) {
   e.preventDefault();
 
   //ho ny p ot value access
-  const email = document.querySelector("#email").value;
-  const name = document.querySelector("#email").value;
+  const email = document.querySelector("#email-modal").value;
+  const name = document.querySelector("#name-modal").value;
 
   // allert if filled via a b/o-/t
   if (name !== "" || email !== "") {
@@ -188,14 +182,17 @@ function newNoteModal(e) {
 
     // form validation
     if (subject === "" || note === "" || colorSelected === "") {
-      alert("Please fill all fields and select color of card!");
+      document.querySelector(".error-message-modal").style.display = "block";
+      setTimeout(() => {
+        document.querySelector(".error-message-modal").style.display = "none";
+      }, 3000);
     } else {
       //counting the number of clicking on button to use it for order of flexbox
       // using (-count) to reverse the order
       document.querySelector("#form-input-modal").onclick = function () {
         count = count + 1;
       };
-      
+
       //card-container: create the <div> of the card-container and add its class and append it to his parrent
       const myNoteDiv = document.createElement("div");
       myNoteDiv.classList.add("card-container");
@@ -238,26 +235,26 @@ function newNoteModal(e) {
       backCardP.appendChild(document.createTextNode(note));
       backCardDiv.appendChild(backCardP);
 
-      
-      
       // send the values to the function to saving to LS
       addNoteToLS(subject, note, colorSelected);
 
       modalClose();
-      
+
       //to empty the form input
-document.getElementsByName('note-form-modal')[0].reset();
+      document.getElementsByName("note-form-modal")[0].reset();
     }
   }
 }
 
 //remove notes by click on the remove-btn
 function removeNote(e) {
-    e.preventDefault();
+  e.preventDefault();
   if (e.target.classList.contains("remove-btn")) {
     e.target.parentElement.remove();
     // call the function to also remove notes from LS (using the subject value to remove)
-    removeNoteFromLs(e.target.parentElement.children[1].children[0].textContent);
+    removeNoteFromLs(
+      e.target.parentElement.children[1].children[0].textContent
+    );
   }
 }
 
@@ -320,8 +317,7 @@ function localStorageOnLoad() {
   const subjects = getSubjectFromLS();
   const notes = getNoteFromLS();
   const colors = getColorFromLS();
-  count = notes.length
-
+  count = notes.length;
 
   //using forEach to use same index number and read properties
   notes.forEach((note) => {
@@ -334,7 +330,6 @@ function localStorageOnLoad() {
     myNoteDiv.classList.add("card-container");
     myNoteDiv.style.order = -indexNumberOfNote;
     myNote.prepend(myNoteDiv);
-
 
     //remove-btn: create the <a> of the remove-btn  and add its class and apeend it to his parrent
     const removeBtn = document.createElement("a");
@@ -399,8 +394,6 @@ function removeNoteFromLs(deleteSubject) {
 function removeExample() {
   localStorage.setItem("example", "1");
 }
-
-
 
 //*****************************************************************\\
 // contact aly3n via this mail: dev.aly3n [AAATTT] gmail {dot} com ||
