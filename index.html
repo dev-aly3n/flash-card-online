@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notepad</title>
     <link rel="stylesheet" href="assets/css/custom.output.css">
 </head>
 
 <body>
     <div id="content">
+
         <h1>
             flash card online
-            </br>
-            (or maybe a dictionary notebook)
         </h1>
         </br>
+        <div class="new-note-btn" href="javascript:void(0);">Add new Note +</div>
+
         <div class="container">
-            <div class="new-note" id="new-note">
+            <div class="new-note ml-5" id="new-note">
                 <h2 for="add-new-note" class="lable" style=" text-align: center; 
                 font-size: 30px; font-weight: bolder;">
                     Create New Note
@@ -22,12 +26,12 @@
                     </br>
                 </h2>
                 <form name="note-form" action="#" id="form">
-                    <label for="subject-new-note" class="lable"> Subject (or Word) : </label>
+                    <label for="subject-new-note" class="lable"> Word: </label>
                     </br>
                     <input type="text" maxlength="40" name="subject-new-note" id="subject-new-note"
                         class="subject-text-area" placeholder="type your Subject here..." style="margin-bottom: 20px;">
                     </br>
-                    <label for="add-new-note" class="lable"> Note (or description): </label>
+                    <label for="add-new-note" class="lable"> Description: </label>
                     </br>
                     <textarea type="text"  name="text-note" id="add-new-note" class="form-text-area"
                         placeholder="type your Note here..."></textarea>
@@ -53,7 +57,6 @@
             </div>
             <!-- /// © 2020 dev-aly3n /// -->
             <div class="column" id="my-note">
-                <button class="new-note-btn">Add new Note</button>
                 <h2 style="text-align: center; 
                 font-size: 30px; font-weight: bolder; margin-bottom: 0; text-decoration: underline; ">
                     my notes
@@ -84,9 +87,72 @@
                 </div>
             </div>
         </div>
+
     </div>
-    </div>
-    </div>
+
+    
+<!-- modal for ioening the form in the mobile -->
+    <section id="modalform">
+        <div class="main-modal">
+          <div class="modal-container">
+            <div class="modal-content p-0">
+              <!--Body-->
+              <div class="new-note h-full mt-0 w-full" id="new-note-modal" style="display: block;">
+                <div class="flex justify-between items-center pb-3 float-right">
+                    <div
+                      class="modal-close cursor-pointer z-50"
+                    >
+                      <svg
+                        class="fill-current text-black"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        viewBox="0 0 18 18"
+                      >
+                        <path
+                          d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                <h2 for="add-new-note" class="lable" style=" text-align: center; 
+                font-size: 30px; font-weight: bolder;">
+                    Create New Note
+                </h2>
+                <form name="note-form-modal" action="#" id="form-modal" >
+                    <label for="subject-new-note" class="lable"> Word: </label>
+                    </br>
+                    <input type="text" maxlength="40" name="subject-new-note" id="subject-new-note-modal"
+                        class="subject-text-area" placeholder="type your Subject here..." style="margin-bottom: 20px;">
+                    </br>
+                    <label for="add-new-note" class="lable"> Description: </label>
+                    </br>
+                    <textarea type="text"  name="text-note" id="add-new-note-modal" class="form-text-area" style="min-height: 100px;"
+                        placeholder="type your Note here..."></textarea>
+                    </br>
+                    <label for="color-selection" class="lable">select color for card:</label>
+                    <select id="color-selection-modal" name="color-selection">
+                        <option value="pink">pink</option>
+                        <option value="#00ffff" selected>blue</option>
+                        <option value="#80ff00">green </option>
+                        <option value="#ffbf00">yellow </option>
+                    </select>
+                    </br>
+                    <button href="javascript:void(0);" class="form-input" id="form-input-modal" >Save</button>
+
+                    <!-- H o/ n /e y p /o/ t -->
+                    <label class="dear" for="email"></label>
+                    <input class="dear" type="email" id="email-modal" name="email" autocomplete="off"
+                        placeholder="Your e-mail here...">
+                    <label class="dear" for="name"></label>
+                    <input class="dear" type="text" id="name-modal" name="name" placeholder="Your name here..."
+                        autocomplete="off">
+                </form>
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
     <script src="assets/js/app.js"></script>
 </body>
 
