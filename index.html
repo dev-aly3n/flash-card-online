@@ -10,7 +10,7 @@
 
   <body>
     <section>
-      <div id="content">
+      <div id="content" class="content">
         <h1>flash card online</h1>
         <br />
         <div class="new-note-btn">Add new Note +</div>
@@ -32,7 +32,7 @@
                 maxlength="40"
                 name="subject-new-note"
                 id="subject-new-note"
-                class="subject-text-area"
+                class="subject-text-area subject-new-note"
                 placeholder="Type your Word here..."
                 style="margin-bottom: 20px"
               />
@@ -42,18 +42,18 @@
               <textarea
                 name="text-note"
                 id="add-new-note"
-                class="form-text-area"
+                class="form-text-area add-new-note"
                 placeholder="Add your Note here..."
               ></textarea>
               <br />
               <label for="color-selection" class="lable"
                 >select color for card:</label
               >
-              <select id="color-selection" name="color-selection">
-                <option value="pink">pink</option>
-                <option value="#00ffff" selected>blue</option>
-                <option value="#80ff00">green</option>
-                <option value="#ffbf00">yellow</option>
+              <select id="color-selection" name="color-selection" class="color-selection">
+                <option value="rgb(255, 192, 203)">pink</option>
+                <option value="rgb(0, 255, 255)" selected>blue</option>
+                <option value="rgb(128, 255, 0)">green</option>
+                <option value="rgb(255, 191, 0)">yellow</option>
               </select>
               <br />
               <input
@@ -85,7 +85,7 @@
             </form>
           </div>
           <!-- /// © 2020 dev-aly3n /// -->
-          <div class="column" id="my-note">
+          <div class="column my-note" id="my-note">
             <h2
               style="
                 text-align: center;
@@ -97,12 +97,13 @@
             >
               my notes
             </h2>
-            <div id="flexbox-container">
+            <div id="flexbox-container" class="flexbox-container">
               <div class="card-container" style="display: none; order: 999">
                 <span class="remove-btn" id="example"> ✕ </span>
+                <span  class="edit-btn" ><i class="fas fa-edit"></i> </span>
                 <div class="card">
                   <div class="front">
-                    <h2 id="front-of-card">
+                    <h2 class="front-of-card">
                       Hi there!
                       <br />
                       I am an example of the subject!
@@ -166,7 +167,7 @@
                   maxlength="40"
                   name="subject-new-note"
                   id="subject-new-note-modal"
-                  class="subject-text-area"
+                  class="subject-text-area subject-new-note-modal"
                   placeholder="Type your Word here..."
                   style="margin-bottom: 20px"
                 />
@@ -176,15 +177,15 @@
                 <textarea
                   name="text-note"
                   id="add-new-note-modal"
-                  class="form-text-area"
+                  class="form-text-area add-new-note-modal"
                   style="min-height: 100px"
                   placeholder="Add your Note here..."
                 ></textarea>
                 <br />
-                <label for="color-selection" class="lable"
+                <label for="color-selection-modal" class="lable"
                   >select color for card:</label
                 >
-                <select id="color-selection-modal" name="color-selection">
+                <select id="color-selection-modal" name="color-selection" class="color-selection-modal">
                   <option value="pink">pink</option>
                   <option value="#00ffff" selected>blue</option>
                   <option value="#80ff00">green</option>
@@ -218,6 +219,11 @@
         </div>
       </div>
     </section>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+      integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ=="
+      crossorigin="anonymous"
+    ></script>
     <script src="assets/js/app.js"></script>
   </body>
 </html>

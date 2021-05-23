@@ -9,7 +9,7 @@
     animation: all 0.5s ease;
   }
 
-  #content {
+  .content {
     background-color: #e6ffff;
     @apply mx-1 pt-5 pb-10 lg:mx-16 lg:mt-5 lg:mb-10 lg:py-5  rounded-xl h-full shadow-2xl;
   }
@@ -19,16 +19,16 @@
     @apply hidden lg:block lg:w-1/3 xl:w-1/4 p-5 h-screen rounded-md shadow-2xl mt-20;
   }
 
-  #add-new-note,
-  #add-new-note-modal {
+  .add-new-note,
+  .add-new-note-modal {
     word-wrap: break-word;
   }
 
-  #my-note {
+  .my-note {
     @apply w-11/12 lg:w-8/12 mx-0;
   }
 
-  #flexbox-container {
+  .flexbox-container {
     @apply p-2 flex flex-wrap justify-center h-auto
      w-full items-center m-auto;
   }
@@ -37,22 +37,22 @@
     @apply flex justify-center items-start m-auto min-w-full mt-4;
   }
 
-  #subject-new-note,
-  #subject-new-note-modal {
+  .subject-new-note,
+  .subject-new-note-modal {
     border: 1px solid #ccc;
     @apply w-full py-3 px-5 mx-0 my-3 rounded-md inline-block;
   }
 
-  #front-of-card {
-    @apply mt-24 text-center align-middle font-semibold text-2xl;
+  .front-of-card {
+    @apply  text-center align-middle font-semibold text-2xl;
   }
 
   .back-of-card {
     @apply ml-8 p-2 text-left align-middle font-normal text-base break-words mt-2;
   }
 
-  #color-selection,
-  #color-selection-modal {
+  .color-selection,
+  .color-selection-modal {
     border: 1px solid #ccc;
     @apply mt-3 w-full py-3 px-5 my-3 mx-0 inline-block rounded-md shadow-inner;
   }
@@ -70,7 +70,7 @@
     @apply fixed top-2 left-2;
   }
 
-  .sticky + #content {
+  .sticky + .content {
     @apply pt-16 pl-2;
   }
 
@@ -102,9 +102,17 @@
   }
 
   .remove-btn {
-    border-radius: 5px 5px 0 0;
+
+    border-radius: 5px 0 0 0;
     @apply text-red-600 float-left px-2 text-center font-bold cursor-pointer no-underline
      bg-red-200 hover:bg-red-400 active:bg-red-600 hover:text-white active:text-white;
+  }
+
+  .edit-btn {
+
+    border-radius: 0 5px 0 0;
+    @apply text-yellow-800 float-left pl-2 pr-1 text-center font-bold cursor-pointer no-underline
+     bg-yellow-200 hover:bg-yellow-400 active:bg-yellow-800 hover:text-white active:text-white;
   }
 
   .card-container {
@@ -135,8 +143,9 @@
     @apply w-full h-full absolute overflow-x-hidden;
   }
   .front {
+
     border-radius: 3px 8px 8px 3px;
-    @apply z-20;
+    @apply z-20 flex flex-col justify-center items-center;
   }
 
   .back {

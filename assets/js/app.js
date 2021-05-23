@@ -50,7 +50,8 @@ function myFunction() {
 }
 
 //variables
-const myNote = document.querySelector("#flexbox-container");
+const myNote = document.querySelector(".flexbox-container");
+let order;
 
 // counting the clicking button
 let count;
@@ -76,11 +77,15 @@ function eventlisteners() {
 
   //load saved note from LS
   document.addEventListener("DOMContentLoaded", localStorageOnLoad);
+
+  document.querySelectorAll(".edit-btn").forEach((el) => {
+    el.addEventListener("click", editNote);
+  });
 }
 
 //functions
 
-function newNote(e) {
+function newNote(e,ord) {
   e.preventDefault();
 
   //ho ny p ot value access
@@ -92,11 +97,11 @@ function newNote(e) {
     alert("you are a fucking dumb bot?!");
   } else {
     //access the value of form inputs
-    const subject = document.querySelector("#subject-new-note").value;
-    const note = document.querySelector("#add-new-note").value;
+    const subject = document.querySelector(".subject-new-note").value;
+    const note = document.querySelector(".add-new-note").value;
 
     // get the value of selected color
-    const colorSelected = document.querySelector("#color-selection").value;
+    const colorSelected = document.querySelector(".color-selection").value;
 
     // form validation
     if (subject === "" || note === "" || colorSelected === "") {
@@ -114,6 +119,7 @@ function newNote(e) {
       //card-container: create the <div> of the card-container and add its class and append it to his parrent
       const myNoteDiv = document.createElement("div");
       myNoteDiv.classList.add("card-container");
+
       myNoteDiv.style.order = -count;
       myNote.prepend(myNoteDiv);
 
@@ -124,6 +130,11 @@ function newNote(e) {
       removeBtn.appendChild(document.createTextNode("✕"));
       //removeBtn.setAttribute("href", "#")
       myNoteDiv.appendChild(removeBtn);
+
+      const editBtn = document.createElement("span");
+      editBtn.classList.add("edit-btn");
+      editBtn.innerHTML = `<i class="fas fa-edit"></i>`;
+      myNoteDiv.appendChild(editBtn);
 
       //card: create the <div> of the card  and add its class and apeend it to his parrent
       const cardDiv = document.createElement("div");
@@ -138,7 +149,7 @@ function newNote(e) {
 
       //h2-card: create the <h2> of the h2-card  and add its class and apeend it to his parrent
       const frontH2 = document.createElement("h2");
-      frontH2.setAttribute("id", "front-of-card");
+      frontH2.setAttribute("class", "front-of-card");
       frontH2.appendChild(document.createTextNode(subject));
       frontCardDiv.appendChild(frontH2);
 
@@ -154,7 +165,7 @@ function newNote(e) {
       backCardDiv.appendChild(backCardP);
 
       //to empty the form input
-      this.reset();
+      document.getElementsByName("note-form")[0].reset();
 
       // send the values to the function to saving to LS
       addNoteToLS(subject, note, colorSelected);
@@ -174,11 +185,11 @@ function newNoteModal(e) {
     alert("you are a fucking dumb bot?!");
   } else {
     //access the value of form inputs
-    let subject = document.querySelector("#subject-new-note-modal").value;
-    let note = document.querySelector("#add-new-note-modal").value;
+    let subject = document.querySelector(".subject-new-note-modal").value;
+    let note = document.querySelector(".add-new-note-modal").value;
 
     // get the value of selected color
-    let colorSelected = document.querySelector("#color-selection-modal").value;
+    let colorSelected = document.querySelector(".color-selection-modal").value;
 
     // form validation
     if (subject === "" || note === "" || colorSelected === "") {
@@ -207,6 +218,11 @@ function newNoteModal(e) {
       //removeBtn.setAttribute("href", "#")
       myNoteDiv.appendChild(removeBtn);
 
+      const editBtn = document.createElement("span");
+      editBtn.classList.add("edit-btn");
+      editBtn.innerHTML = `<i class="fas fa-edit"></i>`;
+      myNoteDiv.appendChild(editBtn);
+
       //card: create the <div> of the card  and add its class and apeend it to his parrent
       const cardDiv = document.createElement("div");
       cardDiv.classList.add("card");
@@ -220,7 +236,7 @@ function newNoteModal(e) {
 
       //h2-card: create the <h2> of the h2-card  and add its class and apeend it to his parrent
       const frontH2 = document.createElement("h2");
-      frontH2.setAttribute("id", "front-of-card");
+      frontH2.setAttribute("class", "front-of-card");
       frontH2.appendChild(document.createTextNode(subject));
       frontCardDiv.appendChild(frontH2);
 
@@ -255,6 +271,44 @@ function removeNote(e) {
     removeNoteFromLs(
       e.target.parentElement.children[1].children[0].textContent
     );
+  }
+}
+
+//edit notes
+function editNote(e) {
+  e.preventDefault();
+  const editBtn = e.currentTarget;
+  const frontText =
+    editBtn.parentElement.lastElementChild.firstElementChild.firstElementChild
+      .textContent;
+  const backText =
+    editBtn.parentElement.lastElementChild.lastElementChild.firstElementChild
+      .textContent;
+  const colorSelection = window.getComputedStyle(
+    editBtn.parentElement.lastElementChild.firstElementChild
+  ).backgroundColor;
+  order = editBtn.parentElement.style.order;
+
+  if (screen.width >= 1024) {
+    document.querySelector("#subject-new-note").value = frontText;
+    document.querySelector("#add-new-note").value = backText;
+    const select = document.querySelector("#color-selection");
+    let optionLength = select.options.length;
+    for (let i = 0; i < optionLength; i++) {
+      if (select.options[i].value == colorSelection) {
+        select.options.selectedIndex = i;
+      } else if (select.options[i].value == colorSelection) {
+        select.options.selectedIndex = i;
+      } else if (select.options[i].value == colorSelection) {
+        select.options.selectedIndex = i;
+      } else if (select.options[i].value == colorSelection) {
+        select.options.selectedIndex = i;
+      }
+    }
+
+    newNote(e)
+
+
   }
 }
 
@@ -338,6 +392,11 @@ function localStorageOnLoad() {
     removeBtn.setAttribute("href", "#");
     myNoteDiv.appendChild(removeBtn);
 
+    const editBtn = document.createElement("span");
+    editBtn.classList.add("edit-btn");
+    editBtn.innerHTML = `<i class="fas fa-edit"></i>`;
+    myNoteDiv.appendChild(editBtn);
+
     //card: create the <div> of the card  and add its class and apeend it to his parrent
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
@@ -351,7 +410,7 @@ function localStorageOnLoad() {
 
     //h2-card: create the <h2> of the h2-card  and add its class and apeend it to his parrent
     const frontH2 = document.createElement("h2");
-    frontH2.setAttribute("id", "front-of-card");
+    frontH2.setAttribute("class", "front-of-card");
     frontH2.appendChild(document.createTextNode(subject));
     frontCardDiv.appendChild(frontH2);
 
@@ -366,6 +425,10 @@ function localStorageOnLoad() {
     backCardP.classList.add("back-of-card");
     backCardP.appendChild(document.createTextNode(note));
     backCardDiv.appendChild(backCardP);
+  });
+
+  document.querySelectorAll(".edit-btn").forEach((el) => {
+    el.addEventListener("click", editNote);
   });
 }
 
