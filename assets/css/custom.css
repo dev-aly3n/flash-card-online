@@ -5,6 +5,11 @@
 @tailwind utilities;
 
 @layer components {
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   * {
     animation: all 0.5s ease;
   }
@@ -80,7 +85,13 @@
     border-color: cornsilk;
     @apply border-none text-white py-4 px-8 text-center text-base my-1 mx-1 opacity-60
      no-underline cursor-pointer flex justify-center items-center w-full rounded-md
-     hover:opacity-75 active:opacity-100;
+     hover:opacity-75 active:opacity-100 shadow-2xl;
+  }
+
+  .edit-save {
+    @apply border-none text-black py-4 px-8 text-center text-base my-1 mx-1
+     no-underline cursor-pointer flex justify-center items-center w-full rounded-md
+     bg-green-200 hover:bg-green-400 active:bg-green-600 active:text-white shadow-2xl;
   }
 
   .form-text-area {

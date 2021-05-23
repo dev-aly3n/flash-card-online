@@ -12,6 +12,11 @@ function modalClose() {
 }
 
 document.querySelector(".new-note-btn").addEventListener("click", function () {
+  document.getElementsByName("note-form-modal")[0].reset();
+  document.querySelector(".edit-save-modal").style.display = "none";
+  document.querySelector(".form-input-modal").style.display = "block";
+  document.querySelector("#create-new-note-h2-modal").innerText =
+    "Create New Note";
   modal.classList.remove("fadeOut");
   modal.classList.add("fadeIn");
   modal.style.display = "flex";
@@ -49,9 +54,15 @@ function myFunction() {
   }
 }
 
+//random Id generator
+function randomIdGenerator(str) {
+  let id = str + Math.random() * 100000000000000000;
+  return id;
+}
+//random Id generator
+
 //variables
 const myNote = document.querySelector(".flexbox-container");
-let order;
 
 // counting the clicking button
 let count;
@@ -64,7 +75,7 @@ eventlisteners();
 // create event listeners
 function eventlisteners() {
   // submit the form
-  document.querySelector("#form").addEventListener("submit", newNote);
+  document.querySelector("#form-input").addEventListener("click", newNote);
   document
     .querySelector("#form-input-modal")
     .addEventListener("click", newNoteModal);
@@ -85,7 +96,7 @@ function eventlisteners() {
 
 //functions
 
-function newNote(e,ord) {
+function newNote(e) {
   e.preventDefault();
 
   //ho ny p ot value access
@@ -112,13 +123,12 @@ function newNote(e,ord) {
     } else {
       //counting the number of clicking on button to use it for order of flexbox
       // using (-count) to reverse the order
-      document.querySelector("#form-input").onclick = function () {
-        count = count + 1;
-      };
+      count = count + 1;
 
       //card-container: create the <div> of the card-container and add its class and append it to his parrent
       const myNoteDiv = document.createElement("div");
       myNoteDiv.classList.add("card-container");
+      myNoteDiv.setAttribute("note-id", randomIdGenerator(subject.slice(-10)));
 
       myNoteDiv.style.order = -count;
       myNote.prepend(myNoteDiv);
@@ -168,7 +178,13 @@ function newNote(e,ord) {
       document.getElementsByName("note-form")[0].reset();
 
       // send the values to the function to saving to LS
-      addNoteToLS(subject, note, colorSelected);
+      const noteObject = {
+        subject: subject,
+        note: note,
+        color: colorSelected,
+        id: myNoteDiv.getAttribute("note-id"),
+      };
+      addNoteToLS(noteObject);
     }
   }
 }
@@ -200,12 +216,12 @@ function newNoteModal(e) {
     } else {
       //counting the number of clicking on button to use it for order of flexbox
       // using (-count) to reverse the order
-      document.querySelector("#form-input-modal").onclick = function () {
-        count = count + 1;
-      };
+
+      count = count + 1;
 
       //card-container: create the <div> of the card-container and add its class and append it to his parrent
       const myNoteDiv = document.createElement("div");
+      myNoteDiv.setAttribute("note-id", randomIdGenerator(subject.slice(-10)));
       myNoteDiv.classList.add("card-container");
       myNoteDiv.style.order = -count;
       myNote.prepend(myNoteDiv);
@@ -252,7 +268,13 @@ function newNoteModal(e) {
       backCardDiv.appendChild(backCardP);
 
       // send the values to the function to saving to LS
-      addNoteToLS(subject, note, colorSelected);
+      const noteObject = {
+        subject: subject,
+        note: note,
+        color: colorSelected,
+        id: myNoteDiv.getAttribute("note-id"),
+      };
+      addNoteToLS(noteObject);
 
       modalClose();
 
@@ -268,9 +290,8 @@ function removeNote(e) {
   if (e.target.classList.contains("remove-btn")) {
     e.target.parentElement.remove();
     // call the function to also remove notes from LS (using the subject value to remove)
-    removeNoteFromLs(
-      e.target.parentElement.children[1].children[0].textContent
-    );
+
+    removeNoteFromLs(e.target.parentElement.getAttribute("note-id"));
   }
 }
 
@@ -278,20 +299,19 @@ function removeNote(e) {
 function editNote(e) {
   e.preventDefault();
   const editBtn = e.currentTarget;
-  const frontText =
-    editBtn.parentElement.lastElementChild.firstElementChild.firstElementChild
-      .textContent;
-  const backText =
-    editBtn.parentElement.lastElementChild.lastElementChild.firstElementChild
-      .textContent;
-  const colorSelection = window.getComputedStyle(
+  let frontText =
+    editBtn.parentElement.lastElementChild.firstElementChild.firstElementChild;
+  let backText =
+    editBtn.parentElement.lastElementChild.lastElementChild.firstElementChild;
+  let colorSelection = window.getComputedStyle(
     editBtn.parentElement.lastElementChild.firstElementChild
   ).backgroundColor;
-  order = editBtn.parentElement.style.order;
+  const order = editBtn.parentElement.style.order;
+  const id = editBtn.parentElement.getAttribute("note-id");
 
   if (screen.width >= 1024) {
-    document.querySelector("#subject-new-note").value = frontText;
-    document.querySelector("#add-new-note").value = backText;
+    document.querySelector("#subject-new-note").value = frontText.textContent;
+    document.querySelector("#add-new-note").value = backText.textContent;
     const select = document.querySelector("#color-selection");
     let optionLength = select.options.length;
     for (let i = 0; i < optionLength; i++) {
@@ -306,40 +326,134 @@ function editNote(e) {
       }
     }
 
-    newNote(e)
+    document.querySelector("#create-new-note-h2").scrollIntoView();
+    document.querySelector("#create-new-note-h2").innerText = "Editing...";
+    document.querySelector(".edit-save").style.display = "block";
+    document.querySelector(".form-input").style.display = "none";
+    document
+      .querySelector(".edit-save")
+      .addEventListener("click", function editing(event) {
+        event.preventDefault();
 
+        const subject = document.querySelector(".subject-new-note").value;
+        const note = document.querySelector(".add-new-note").value;
+        const colorSelected = document.querySelector(".color-selection").value;
+        frontText.innerText = subject;
+        backText.innerText = note;
+        editBtn.parentElement.lastElementChild.firstElementChild.style.backgroundColor =
+          colorSelected;
+        document.querySelector(".edit-save").style.display = "none";
+        document.querySelector(".form-input").style.display = "block";
+        document.querySelector("#create-new-note-h2").innerText =
+          "Create New Note";
+        document.getElementsByName("note-form")[0].reset();
+        document
+          .querySelector(".edit-save")
+          .removeEventListener("click", editing);
 
+        //LS
+        const noteObject = {
+          subject: subject,
+          note: note,
+          color: colorSelected,
+          id: id,
+        };
+        const notes = getNoteObjectFromLS();
+        notes.forEach((noteObj, index) => {
+          if (noteObj.id == id) {
+            notes.splice(index, 1, noteObject);
+          }
+        });
+        localStorage.setItem("notes", JSON.stringify(notes));
+      });
+  } else {
+    modal.classList.remove("fadeOut");
+    modal.classList.add("fadeIn");
+    modal.style.display = "flex";
+
+    document.querySelector("#subject-new-note-modal").value =
+      frontText.textContent;
+    document.querySelector("#add-new-note-modal").value = backText.textContent;
+    const select = document.querySelector("#color-selection-modal");
+    let optionLength = select.options.length;
+    for (let i = 0; i < optionLength; i++) {
+      if (select.options[i].value == colorSelection) {
+        select.options.selectedIndex = i;
+      } else if (select.options[i].value == colorSelection) {
+        select.options.selectedIndex = i;
+      } else if (select.options[i].value == colorSelection) {
+        select.options.selectedIndex = i;
+      } else if (select.options[i].value == colorSelection) {
+        select.options.selectedIndex = i;
+      }
+    }
+
+    document.querySelector("#create-new-note-h2-modal").innerText =
+      "Editing...";
+    document.querySelector(".edit-save-modal").style.display = "block";
+    document.querySelector(".form-input-modal").style.display = "none";
+
+    document
+      .querySelector(".edit-save-modal")
+      .addEventListener("click", function editingModal(event) {
+        event.preventDefault();
+
+        const subject = document.querySelector(".subject-new-note-modal").value;
+        const note = document.querySelector(".add-new-note-modal").value;
+        const colorSelected = document.querySelector(
+          ".color-selection-modal"
+        ).value;
+        frontText.innerText = subject;
+        backText.innerText = note;
+        editBtn.parentElement.lastElementChild.firstElementChild.style.backgroundColor =
+          colorSelected;
+        document.querySelector(".edit-save-modal").style.display = "none";
+        document.querySelector(".form-input-modal").style.display = "block";
+        document.querySelector("#create-new-note-h2-modal").innerText =
+          "Create New Note";
+        document.getElementsByName("note-form")[0].reset();
+        document
+          .querySelector(".edit-save-modal")
+          .removeEventListener("click", editingModal);
+
+        //LS
+        const noteObject = {
+          subject: subject,
+          note: note,
+          color: colorSelected,
+          id: id,
+        };
+        const notes = getNoteObjectFromLS();
+        notes.forEach((noteObj, index) => {
+          if (noteObj.id == id) {
+            notes.splice(index, 1, noteObject);
+          }
+        });
+        localStorage.setItem("notes", JSON.stringify(notes));
+
+        modalClose();
+      });
   }
 }
 
 // save to LS
-function addNoteToLS(subject, note, colorSelected) {
-  const subjects = getSubjectFromLS();
-  const notes = getNoteFromLS();
-  const colors = getColorFromLS();
+function addNoteToLS(noteObject) {
+  const notes = getNoteObjectFromLS();
 
-  subjects.push(subject);
-  notes.push(note);
-  colors.push(colorSelected);
+  const newNote = {
+    subject: noteObject.subject,
+    note: noteObject.note,
+    color: noteObject.color,
+    id: noteObject.id,
+  };
 
-  localStorage.setItem("subjects", JSON.stringify(subjects));
+  notes.push(newNote);
+
   localStorage.setItem("notes", JSON.stringify(notes));
-  localStorage.setItem("colors", JSON.stringify(colors));
-}
-
-//getting subjects from LS
-function getSubjectFromLS() {
-  let subjects;
-  if (localStorage.getItem("subjects") === null) {
-    subjects = [];
-  } else {
-    subjects = JSON.parse(localStorage.getItem("subjects"));
-  }
-  return subjects;
 }
 
 //getting notes from LS
-function getNoteFromLS() {
+function getNoteObjectFromLS() {
   let notes;
   if (localStorage.getItem("notes") === null) {
     notes = [];
@@ -347,17 +461,6 @@ function getNoteFromLS() {
     notes = JSON.parse(localStorage.getItem("notes"));
   }
   return notes;
-}
-
-//getting colors from LS
-function getColorFromLS() {
-  let colors;
-  if (localStorage.getItem("colors") === null) {
-    colors = [];
-  } else {
-    colors = JSON.parse(localStorage.getItem("colors"));
-  }
-  return colors;
 }
 
 //load notes from LS
@@ -368,21 +471,22 @@ function localStorageOnLoad() {
   }
 
   //access to the values from LS
-  const subjects = getSubjectFromLS();
-  const notes = getNoteFromLS();
-  const colors = getColorFromLS();
+  const notes = getNoteObjectFromLS();
+
   count = notes.length;
 
   //using forEach to use same index number and read properties
-  notes.forEach((note) => {
-    let indexNumberOfNote = notes.indexOf(note);
-    let subject = subjects[indexNumberOfNote];
-    let color = colors[indexNumberOfNote];
+  notes.forEach((noteObject, index) => {
+    let note = noteObject.note;
+    let subject = noteObject.subject;
+    let color = noteObject.color;
+    let id = noteObject.id;
 
     //card-container: create the <div> of the card-container and add its class and append it to his parrent
     const myNoteDiv = document.createElement("div");
+    myNoteDiv.setAttribute("note-id", id);
     myNoteDiv.classList.add("card-container");
-    myNoteDiv.style.order = -indexNumberOfNote;
+    myNoteDiv.style.order = -index;
     myNote.prepend(myNoteDiv);
 
     //remove-btn: create the <a> of the remove-btn  and add its class and apeend it to his parrent
@@ -433,24 +537,19 @@ function localStorageOnLoad() {
 }
 
 // removing notes from LS
-function removeNoteFromLs(deleteSubject) {
+function removeNoteFromLs(id) {
   //access to the values from LS
-  const noteFromLS = getNoteFromLS();
-  const subjectFromLS = getSubjectFromLS();
-  const colorFromLS = getColorFromLS();
+  const noteFromLS = getNoteObjectFromLS();
 
   // using delegation to avoid bubbling effect by compairing the subject values
-  subjectFromLS.forEach((subject, index) => {
-    if (subject === deleteSubject) {
-      subjectFromLS.splice(index, 1);
+
+  noteFromLS.forEach((note, index) => {
+    if (note.id == id) {
       noteFromLS.splice(index, 1);
-      colorFromLS.splice(index, 1);
     }
   });
   //set new array (removed some note array) to the LS
   localStorage.setItem("notes", JSON.stringify(noteFromLS));
-  localStorage.setItem("subjects", JSON.stringify(subjectFromLS));
-  localStorage.setItem("colors", JSON.stringify(colorFromLS));
 }
 
 // set a value "1" to LS if user remove the example note (to using it in the function localStorageOnLoad())

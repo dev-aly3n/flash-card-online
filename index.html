@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notepad</title>
     <link rel="stylesheet" href="assets/css/custom.output.css" />
+    <link rel="stylesheet" href="assets/css/custom.build.css" />
   </head>
 
   <body>
@@ -20,6 +21,7 @@
             <h2
               class="lable mb-8"
               style="text-align: center; font-size: 30px; font-weight: bolder"
+              id="create-new-note-h2"
             >
               Create New Note
             </h2>
@@ -49,19 +51,19 @@
               <label for="color-selection" class="lable"
                 >select color for card:</label
               >
-              <select id="color-selection" name="color-selection" class="color-selection">
+              <select
+                id="color-selection"
+                name="color-selection"
+                class="color-selection"
+              >
                 <option value="rgb(255, 192, 203)">pink</option>
                 <option value="rgb(0, 255, 255)" selected>blue</option>
                 <option value="rgb(128, 255, 0)">green</option>
                 <option value="rgb(255, 191, 0)">yellow</option>
               </select>
               <br />
-              <input
-                type="submit"
-                class="form-input"
-                id="form-input"
-                value="Save"
-              />
+              <button class="edit-save hidden">Edit</button>
+              <button class="form-input" id="form-input">Save</button>
 
               <!-- H o/ n /e y p /o/ t -->
               <label class="dear" for="email"></label>
@@ -98,9 +100,13 @@
               my notes
             </h2>
             <div id="flexbox-container" class="flexbox-container">
-              <div class="card-container" style="display: none; order: 999">
+              <div
+                note-id="jhdu732927303798"
+                class="card-container"
+                style="display: none; order: 999"
+              >
                 <span class="remove-btn" id="example"> ✕ </span>
-                <span  class="edit-btn" ><i class="fas fa-edit"></i> </span>
+                <span class="edit-btn"><i class="fas fa-edit"></i> </span>
                 <div class="card">
                   <div class="front">
                     <h2 class="front-of-card">
@@ -153,6 +159,7 @@
               <h2
                 class="lable"
                 style="text-align: center; font-size: 30px; font-weight: bolder"
+                id="create-new-note-h2-modal"
               >
                 Create New Note
               </h2>
@@ -165,7 +172,7 @@
                 <input
                   type="text"
                   maxlength="40"
-                  name="subject-new-note"
+                  name="subject-new-note-modal"
                   id="subject-new-note-modal"
                   class="subject-text-area subject-new-note-modal"
                   placeholder="Type your Word here..."
@@ -185,14 +192,24 @@
                 <label for="color-selection-modal" class="lable"
                   >select color for card:</label
                 >
-                <select id="color-selection-modal" name="color-selection" class="color-selection-modal">
-                  <option value="pink">pink</option>
-                  <option value="#00ffff" selected>blue</option>
-                  <option value="#80ff00">green</option>
-                  <option value="#ffbf00">yellow</option>
+                <select
+                  id="color-selection-modal"
+                  name="color-selection"
+                  class="color-selection-modal"
+                >
+                  <option value="rgb(255, 192, 203)">pink</option>
+                  <option value="rgb(0, 255, 255)" selected>blue</option>
+                  <option value="rgb(128, 255, 0)">green</option>
+                  <option value="rgb(255, 191, 0)">yellow</option>
                 </select>
                 <br />
-                <button class="form-input" id="form-input-modal">Save</button>
+                <button class="edit-save edit-save-modal hidden">Edit</button>
+                <button
+                  class="form-input form-input-modal"
+                  id="form-input-modal"
+                >
+                  Save
+                </button>
 
                 <!-- H o/ n /e y p /o/ t -->
                 <label class="dear" for="email"></label>

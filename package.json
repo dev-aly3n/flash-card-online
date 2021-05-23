@@ -6,7 +6,7 @@
   "scripts": {
     "build": "postcss assets/css/custom.css -o assets/css/custom.output.css",
     "watch": "postcss assets/css/custom.css -o assets/css/custom.output.css --watch",
-    "prod": "cross-env NODE_ENV=production postcss assets/css/custom.css -o assets/css/custom.output.css"
+    "prod": "cross-env NODE_ENV=production postcss assets/css/custom.css -o assets/css/custom.build.css"
   },
   "keywords": [],
   "author": "",
