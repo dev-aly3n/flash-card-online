@@ -5,7 +5,6 @@
 @tailwind utilities;
 
 @layer components {
-
   html {
     scroll-behavior: smooth;
   }
@@ -49,7 +48,7 @@
   }
 
   .front-of-card {
-    @apply  text-center align-middle font-semibold text-2xl;
+    @apply text-center align-middle font-semibold text-2xl;
   }
 
   .back-of-card {
@@ -68,7 +67,7 @@
   .new-note-btn {
     @apply w-36 lg:hidden cursor-pointer p-2 ring-2 rounded-lg focus:outline-none font-medium
      bg-blue-200 hover:bg-blue-400 active:bg-blue-600 active:text-white shadow-3xl
-    top-16 ml-2 z-50 ;
+    top-16 ml-2 z-50;
   }
 
   .sticky {
@@ -113,14 +112,12 @@
   }
 
   .remove-btn {
-
     border-radius: 5px 0 0 0;
     @apply text-red-600 float-left px-2 text-center font-bold cursor-pointer no-underline
      bg-red-200 hover:bg-red-400 active:bg-red-600 hover:text-white active:text-white;
   }
 
   .edit-btn {
-
     border-radius: 0 5px 0 0;
     @apply text-yellow-800 float-left pl-2 pr-1 text-center font-bold cursor-pointer no-underline
      bg-yellow-200 hover:bg-yellow-400 active:bg-yellow-800 hover:text-white active:text-white;
@@ -154,7 +151,6 @@
     @apply w-full h-full absolute overflow-x-hidden;
   }
   .front {
-
     border-radius: 3px 8px 8px 3px;
     @apply z-20 flex flex-col justify-center items-center;
   }

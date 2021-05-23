@@ -187,6 +187,9 @@ function newNote(e) {
       addNoteToLS(noteObject);
     }
   }
+  document.querySelectorAll(".edit-btn").forEach((el) => {
+    el.addEventListener("click", editNote);
+  });
 }
 
 function newNoteModal(e) {
@@ -282,6 +285,9 @@ function newNoteModal(e) {
       document.getElementsByName("note-form-modal")[0].reset();
     }
   }
+  document.querySelectorAll(".edit-btn").forEach((el) => {
+    el.addEventListener("click", editNote);
+  });
 }
 
 //remove notes by click on the remove-btn
