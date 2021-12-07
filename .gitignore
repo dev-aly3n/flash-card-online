@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+
 
 # misc
 .DS_Store
@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # tailwind generated css
-/assets/css/custom.output.css
+/css/custom.output.css

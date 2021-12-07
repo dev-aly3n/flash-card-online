@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "build": "postcss css/custom.css -o public/custom.output.css",
-    "watch": "postcss css/custom.css -o public/custom.output.css --watch",
-    "prod": "cross-env NODE_ENV=production postcss css/custom.css -o public/custom.build.css"
+    "build": "cross-env NODE_ENV=production postcss css/custom.css -o public/custom.build.css",
+    "build2": "postcss css/custom.css -o public/custom.output.css",
+    "watch": "postcss css/custom.css -o public/custom.output.css --watch"
   },
   "keywords": [],
   "author": "",
