@@ -1,6 +1,6 @@
 # flash-card-online
 my first project. a very simple flash card for learning a new language.
-
+Live : https://flash-card.aly3n.dev/
 
 ///          © 2020 dev-aly3n         ///      
 
